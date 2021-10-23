@@ -19,9 +19,8 @@
 async function searchShows(query) {
   // TODO: Make an ajax request to the searchShows api.  Remove
   // hard coded data.
-  const searchQuery = $('#search-query').val();
   const response = await axios.get('https://api.tvmaze.com/search/shows', {
-    params: { q: searchQuery },
+    params: { q: query },
   });
 
   return response.data.map((element) => {
@@ -44,7 +43,6 @@ function populateShows(shows) {
   $showsList.empty();
 
   for (let show of shows) {
-    // $('body').data('id', show.id);
     let $item = $(
       `<div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
          <div class="card" data-show-id="${show.id}">
@@ -117,7 +115,7 @@ function populateEpisodes(episodes) {
   $('#episodes-list').empty();
 
   // iterate over the episodes array
-  // append each item to list 
+  // append each item to list
   episodes.forEach(function (episode) {
     const { name, season, number } = episode;
     let episodeList = `<li>${name} (season ${season}, number ${number})`;
