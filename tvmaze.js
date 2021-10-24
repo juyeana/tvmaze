@@ -130,7 +130,9 @@ function populateEpisodes(episodes) {
  * added click event with callback function to each episodes button
  */
 
-$('#shows-list').on('click', async function (e) {
+$('#shows-list').on('click', handleShowEpisodes)
+
+async function handleShowEpisodes(e){
   // retrieve show id .closest() look into 'Show' class and get the show id from data-show-id attribute
   let showId = $(e.target).closest('.Show').data('show-id');
 
@@ -139,4 +141,4 @@ $('#shows-list').on('click', async function (e) {
 
   // call populate Episodes function and pass episodes array; this array has a list of objects containing episodes' info
   populateEpisodes(episodes);
-});
+};
