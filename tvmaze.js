@@ -56,7 +56,8 @@ function populateShows(shows) {
              }> 
              </div>
          </div>
-         <div class="text-center"><button class="btn btn-primary btn-episode">Episodes</button></div>
+         <div class="text-center">
+         <button type="button" class="btn btn-primary btn-episode" data-bs-toggle="modal" data-bs-target="#exampleModal">Episodes</button></div>
        </div>
       `
     );
@@ -112,27 +113,31 @@ function populateEpisodes(episodes) {
   if (!episodes) return;
 
   // clean the existing episodes' list
-  $('#episodes-list').empty();
+  // $('#episodes-list').empty();
 
+  // clean up the current expisodes
+  $('.modal-body').empty();
   // iterate over the episodes array
   // append each item to list
   episodes.forEach(function (episode) {
     const { name, season, number } = episode;
-    let episodeList = `<li>${name} (season ${season}, number ${number})`;
-    $('#episodes-list').append(episodeList);
+    let episodeList = `<p>${name} (season ${season}, number ${number})</p>`;
+    $('.modal-body').append(episodeList);
+
+    // $('#episodes-list').append(episodeList);
   });
 
   // make the episodes-area visible
-  $('#episodes-area').show();
+  // $('#episodes-area').show();
 }
 
 /**
  * added click event with callback function to each episodes button
  */
 
-$('#shows-list').on('click', handleShowEpisodes)
+$('#shows-list').on('click', handleShowEpisodes);
 
-async function handleShowEpisodes(e){
+async function handleShowEpisodes(e) {
   // retrieve show id .closest() look into 'Show' class and get the show id from data-show-id attribute
   let showId = $(e.target).closest('.Show').data('show-id');
 
@@ -141,4 +146,4 @@ async function handleShowEpisodes(e){
 
   // call populate Episodes function and pass episodes array; this array has a list of objects containing episodes' info
   populateEpisodes(episodes);
-};
+}
